@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-oxide: var(--oxide);
+  --color-you: var(--you);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --oxide: #1d4ed8;
+  --you: #0b1220;
+  --ink: #0a0a0a;
+  --background: #ffffff;
+  --foreground: oklch(0.2 0.02 250);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --muted: #f4f5f7;
+  --muted-foreground: oklch(0.45 0.02 250);
+  --border: rgb(20 20 20 / 0.08);
+}
+
+.dark {
+  --background: #0c0c0c;
+  --foreground: oklch(0.985 0 0);
+  --card: #171717;
+  --card-foreground: oklch(0.985 0 0);
+  --muted: #262626;
+  --muted-foreground: oklch(0.72 0 0);
+  --border: rgb(255 255 255 / 0.1);
+}
+
+html {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.page-glow {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(48px);
+  animation: drift 18s ease-in-out infinite;
+}
+
+.blob-oxide {
+  width: 22rem;
+  height: 22rem;
+  background: rgb(29 78 216 / 0.32);
+  top: -6rem;
+  right: -4rem;
+}
+
+.blob-you {
+  width: 18rem;
+  height: 18rem;
+  background: rgb(11 18 32 / 0.3);
+  bottom: 10%;
+  left: -5rem;
+  animation-delay: -7s;
+}
+
+.halftone {
+  background-image: radial-gradient(#111 1.1px, transparent 1.15px);
+  background-size: 6px 6px;
+  background-color: #fff;
+}
+
+.card-rise {
+  animation: rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(24px, -18px) scale(1.08);
+  }
+}
+
+.tile-hover {
+  transition:
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 280ms ease;
+}
+
+.tile-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px -24px rgb(20 20 20 / 0.45);
+}
+
+@media (min-width: 768px) {
+  .tilt-left {
+    transform: rotate(-2.2deg);
+  }
+  .tilt-right {
+    transform: rotate(2.4deg);
+  }
+  .tilt-left:hover,
+  .tilt-right:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
+}
+
+.focus-list:hover .focus-item:not(:hover),
+.focus-list:focus-within .focus-item:not(:focus-within),
+.focus-list:has(.focus-item:active) .focus-item:not(:active) {
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
+.focus-item {
+  transition:
+    opacity 200ms ease,
+    filter 200ms ease,
+    transform 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .focus-list:hover .focus-item:not(:hover),
+  .focus-list:focus-within .focus-item:not(:focus-within),
+  .focus-list:has(.focus-item:active) .focus-item:not(:active) {
+    filter: none;
+  }
+}
+
+@media (hover: none) {
+  .focus-list:hover .focus-item:not(:hover) {
+    opacity: 1;
+    filter: none;
+  }
+
+  .focus-list:focus-within .focus-item:not(:focus-within) {
+    opacity: 0.4;
+    filter: blur(2px);
+  }
+}

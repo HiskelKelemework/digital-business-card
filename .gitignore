@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+build
+.vercel
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.log
+next-env.d.ts
+tsconfig.tsbuildinfo
+.verify
