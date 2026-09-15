@@ -15,6 +15,7 @@ import {
 import { ProjectsSection } from "@/components/projects-section";
 import { captureCardPng, ShareCardFace } from "@/components/share-card";
 import { ShareLinks } from "@/components/share-links";
+import { StackBadge } from "@/components/stack-badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Tile, TileLabel } from "@/components/tile";
 import { card } from "@/lib/card";
@@ -40,6 +41,7 @@ const website = safeHttpsUrl(card.website);
 const linkedin = safeHttpsUrl(card.linkedin);
 const whatsapp = isWhatsAppUrl(card.whatsapp) ? card.whatsapp : "";
 const steam = isSteamUrl(card.steam) ? card.steam : "";
+const telegram: string = isTelegramUrl(card.telegram) ? card.telegram : "";
 const telegramGroup = isTelegramUrl(card.telegramGroup.url) ? card.telegramGroup.url : "";
 const youtube = isYouTubeUrl(card.youtube.url) ? card.youtube.url : "";
 const tiply = isTiplyUrl(card.tiply.url) ? card.tiply.url : "";
@@ -287,6 +289,15 @@ export function CardApp() {
               {email ? (
                 <ContactRow href={`mailto:${email}`} icon={<Mail className="size-4" />} label="Email" value={email} />
               ) : null}
+              {telegram ? (
+                <ContactRow
+                  href={telegram}
+                  icon={<TelegramIcon className="size-4" />}
+                  label="Telegram"
+                  value={telegram.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                  external
+                />
+              ) : null}
               {website ? (
                 <ContactRow
                   href={website}
@@ -339,13 +350,10 @@ export function CardApp() {
             <Tile delay={260} className="tilt-left">
               <TileLabel>Stack</TileLabel>
               <p className="mt-2 text-sm text-muted-foreground">Tools I like working with.</p>
-              <ul className="mt-3 flex flex-wrap gap-1.5">
-                {card.stack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground"
-                  >
-                    {tech}
+              <ul className="focus-list mt-3 flex flex-wrap gap-1.5">
+                {card.stack.map((id) => (
+                  <li key={id}>
+                    <StackBadge id={id} />
                   </li>
                 ))}
               </ul>

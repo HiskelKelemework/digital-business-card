@@ -1,3 +1,5 @@
+import type { StackId } from "./stack";
+
 export const card = {
   person: {
     // TODO(Hiskel): confirm the exact spelling/order of your name.
@@ -12,7 +14,7 @@ export const card = {
     bio: "Back End Developer | BSc in Software Engineering",
     photo: "/hiskel-face.jpg",
   },
-  // TODO(Hiskel): fill in your contact details below.
+  // TODO(Hiskel): fill in your contact email, e.g. "you@example.com".
   email: "",
   phone: "",
   phoneDisplay: "",
@@ -21,6 +23,8 @@ export const card = {
   whatsapp: "",
   linkedin: "",
   steam: "",
+  // TODO(Hiskel): your personal Telegram (for direct messages), e.g. "https://t.me/your_handle".
+  telegram: "",
   telegramGroup: {
     url: "https://t.me/hiskel_programming_streams",
     label: "Join the Telegram group",
@@ -37,8 +41,8 @@ export const card = {
     url: "https://www.tiktok.com/@hiskel_kelemework",
     label: "Watch on TikTok",
   },
-  // TODO(Hiskel): edit/add to this list freely — it's just plain strings.
-  stack: ["Node.js", "TypeScript", "PostgreSQL", "Docker"],
+  // TODO(Hiskel): edit/add to this list freely — use any id from lib/stack.ts.
+  stack: ["nodejs", "typescript", "postgresql", "docker", "odin", "rust"] as StackId[],
   // TODO(Hiskel): add more projects the same way — href must be a GitHub repo
   // URL for the star count to load automatically.
   projects: [
