@@ -6,7 +6,7 @@ Scan **Save contact** (`/contact.vcf`) to add a vCard. Scan **Open site** to ope
 
 ## Running the project
 
-Requirements: Node.js 20+ and npm.
+Requirements: Node.js 20.9+ and npm (Next.js 16 dropped support for Node 18; an older Node causes a "Failed to load SWC binary" error at build time).
 
 ```bash
 npm install     # install dependencies (first time only)
