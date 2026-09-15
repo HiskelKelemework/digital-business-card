@@ -75,7 +75,7 @@ export function ProjectsSection() {
     <Tile delay={280} className="md:col-span-2">
       <TileLabel>Projects</TileLabel>
       <p className="mt-2 text-sm text-muted-foreground">A few things I&apos;ve built.</p>
-      <ul className="focus-list mt-4 grid gap-3 sm:grid-cols-2">
+      <ul className={`focus-list mt-4 grid gap-3 ${projects.length > 1 ? "sm:grid-cols-2" : ""}`}>
         {projects.map((project) => (
           <ProjectCard key={project.href} project={project} />
         ))}
