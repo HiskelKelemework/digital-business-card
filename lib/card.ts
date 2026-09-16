@@ -33,6 +33,10 @@ export const card = {
     url: "https://yefam.app/hiskel",
     label: "Support on Yefam",
   },
+  yenetts: {
+    url: "https://yenetts.com/streamer/hiskel_kelemework",
+    label: "Support on Yenetts",
+  },
   tiply: {
     url: "https://www.tiply.et/hiskel",
     label: "Support on Tiply",

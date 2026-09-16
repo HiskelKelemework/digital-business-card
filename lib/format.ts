@@ -92,10 +92,19 @@ export function isTiplyUrl(raw: string) {
   }
 }
 
+export function isYenettsUrl(raw: string) {
+  try {
+    const url = new URL(raw);
+    return url.protocol === "https:" && /(^|\.)tiply\.et$/.test(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
 export function isYefamUrl(raw: string) {
   try {
     const url = new URL(raw);
-    return url.protocol === "https:" && /(^|\.)yefam\.app/.test(url.hostname);
+    return url.protocol === "https:" && /(^|\.)yenetts\.com/.test(url.hostname);
   } catch {
     return false;
   }

@@ -45,16 +45,20 @@ const steam = isSteamUrl(card.steam) ? card.steam : "";
 const telegram: string = isTelegramUrl(card.telegram) ? card.telegram : "";
 const telegramGroup = isTelegramUrl(card.telegramGroup.url) ? card.telegramGroup.url : "";
 const youtube = isYouTubeUrl(card.youtube.url) ? card.youtube.url : "";
+const tiktok = isTikTokUrl(card.tiktok.url) ? card.tiktok.url : "";
+
 const tiply = isTiplyUrl(card.tiply.url) ? card.tiply.url : "";
 const yefam = isYefamUrl(card.yefam.url) ? card.yefam.url : "";
-const tiktok = isTikTokUrl(card.tiktok.url) ? card.tiktok.url : "";
+const yenetts = isYefamUrl(card.yenetts.url) ? card.yenetts.url : "";
+
 type Channel = { href: string; label: string; icon: React.ReactNode };
 const channelCandidates: (Channel | null)[] = [
   telegramGroup ? { href: telegramGroup, label: card.telegramGroup.label, icon: <TelegramIcon className="size-4" /> } : null,
   youtube ? { href: youtube, label: card.youtube.label, icon: <YouTubeIcon className="size-4" /> } : null,
   tiktok ? { href: tiktok, label: card.tiktok.label, icon: <TikTokIcon className="size-4" /> } : null,
-  tiply ? { href: tiply, label: card.tiply.label, icon: <TiplyIcon className="size-4" /> } : null,
   yefam ? { href: yefam, label: card.yefam.label, icon: <TiplyIcon className="size-4" /> } : null,
+  tiply ? { href: tiply, label: card.tiply.label, icon: <TiplyIcon className="size-4" /> } : null,
+  yenetts ? { href: yenetts, label: card.yenetts.label, icon: <TiplyIcon className="size-4" /> } : null,
 ];
 
 console.log(channelCandidates)
