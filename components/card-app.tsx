@@ -32,6 +32,7 @@ import {
   isYefamUrl,
   safeFilename,
   safeHttpsUrl,
+  isYenettsUrl,
 } from "@/lib/format";
 import { exchangeSmsHref } from "@/lib/sms";
 import { downloadVcard } from "@/lib/vcard";
@@ -49,7 +50,7 @@ const tiktok = isTikTokUrl(card.tiktok.url) ? card.tiktok.url : "";
 
 const tiply = isTiplyUrl(card.tiply.url) ? card.tiply.url : "";
 const yefam = isYefamUrl(card.yefam.url) ? card.yefam.url : "";
-const yenetts = isYefamUrl(card.yenetts.url) ? card.yenetts.url : "";
+const yenetts = isYenettsUrl(card.yenetts.url) ? card.yenetts.url : "";
 
 type Channel = { href: string; label: string; icon: React.ReactNode };
 const channelCandidates: (Channel | null)[] = [
@@ -60,8 +61,6 @@ const channelCandidates: (Channel | null)[] = [
   tiply ? { href: tiply, label: card.tiply.label, icon: <TiplyIcon className="size-4" /> } : null,
   yenetts ? { href: yenetts, label: card.yenetts.label, icon: <TiplyIcon className="size-4" /> } : null,
 ];
-
-console.log(channelCandidates)
 
 const channels: Channel[] = channelCandidates.filter((item): item is Channel => item !== null);
 
