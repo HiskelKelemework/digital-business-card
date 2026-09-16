@@ -54,7 +54,10 @@ export function isWhatsAppUrl(raw: string) {
 export function isSteamUrl(raw: string) {
   try {
     const url = new URL(raw);
-    return url.protocol === "https:" && /(^|\.)steamcommunity\.com$/.test(url.hostname);
+    return (
+      url.protocol === "https:" &&
+      /(^|\.)steamcommunity\.com$/.test(url.hostname)
+    );
   } catch {
     return false;
   }
@@ -72,7 +75,9 @@ export function isTelegramUrl(raw: string) {
 export function isYouTubeUrl(raw: string) {
   try {
     const url = new URL(raw);
-    return url.protocol === "https:" && /(^|\.)youtube\.com$/.test(url.hostname);
+    return (
+      url.protocol === "https:" && /(^|\.)youtube\.com$/.test(url.hostname)
+    );
   } catch {
     return false;
   }
@@ -87,10 +92,19 @@ export function isTiplyUrl(raw: string) {
   }
 }
 
+export function isYefamUrl(raw: string) {
+  try {
+    const url = new URL(raw);
+    return url.protocol === "https:" && /(^|\.)yefam\.app/.test(url.hostname);
+  } catch {
+    return false;
+  }
+}
 export function githubRepoFromUrl(raw: string) {
   try {
     const url = new URL(raw);
-    if (url.protocol !== "https:" || !/(^|\.)github\.com$/.test(url.hostname)) return "";
+    if (url.protocol !== "https:" || !/(^|\.)github\.com$/.test(url.hostname))
+      return "";
     const [owner, repo] = url.pathname.replace(/^\/+/, "").split("/");
     return owner && repo ? `${owner}/${repo.replace(/\.git$/, "")}` : "";
   } catch {

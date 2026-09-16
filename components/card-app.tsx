@@ -29,6 +29,7 @@ import {
   isTiplyUrl,
   isWhatsAppUrl,
   isYouTubeUrl,
+  isYefamUrl,
   safeFilename,
   safeHttpsUrl,
 } from "@/lib/format";
@@ -45,6 +46,7 @@ const telegram: string = isTelegramUrl(card.telegram) ? card.telegram : "";
 const telegramGroup = isTelegramUrl(card.telegramGroup.url) ? card.telegramGroup.url : "";
 const youtube = isYouTubeUrl(card.youtube.url) ? card.youtube.url : "";
 const tiply = isTiplyUrl(card.tiply.url) ? card.tiply.url : "";
+const yefam = isYefamUrl(card.yefam.url) ? card.yefam.url : "";
 const tiktok = isTikTokUrl(card.tiktok.url) ? card.tiktok.url : "";
 type Channel = { href: string; label: string; icon: React.ReactNode };
 const channelCandidates: (Channel | null)[] = [
@@ -52,7 +54,11 @@ const channelCandidates: (Channel | null)[] = [
   youtube ? { href: youtube, label: card.youtube.label, icon: <YouTubeIcon className="size-4" /> } : null,
   tiktok ? { href: tiktok, label: card.tiktok.label, icon: <TikTokIcon className="size-4" /> } : null,
   tiply ? { href: tiply, label: card.tiply.label, icon: <TiplyIcon className="size-4" /> } : null,
+  yefam ? { href: yefam, label: card.yefam.label, icon: <TiplyIcon className="size-4" /> } : null,
 ];
+
+console.log(channelCandidates)
+
 const channels: Channel[] = channelCandidates.filter((item): item is Channel => item !== null);
 
 const company = card.person.company;

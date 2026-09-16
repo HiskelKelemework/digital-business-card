@@ -4,6 +4,7 @@ import {
   fillIntro,
   formatMeetTime,
   isE164,
+  calEmbedLink,
   isCalLink,
   isEmail,
   isWhatsAppUrl,
@@ -25,6 +26,10 @@ assert.equal(safeHttpsUrl("https://www.yaltopiatech.com"), "https://www.yaltopia
 assert.equal(isWhatsAppUrl("https://wa.me/251947357283"), true);
 assert.equal(isWhatsAppUrl("https://evil.example/wa.me"), false);
 assert.equal(isCalLink("kirubel-mesfin-yaltopia/30min"), true);
+assert.equal(isCalLink("https://cal.com/hiskel/15min"), true);
+assert.equal(calEmbedLink("https://cal.com/hiskel/15min"), "hiskel/15min");
+assert.equal(calEmbedLink("https://app.cal.com/hiskel/15min"), "hiskel/15min");
+assert.equal(isCalLink("https://evil.example/hiskel/15min"), false);
 assert.equal(isCalLink("javascript:alert(1)"), false);
 assert.equal(smsHref("not-a-phone", "hi"), "");
 assert.equal(fillIntro("Hi — we met on {when}.", "Thursday, 10 Sep 2026 at 4:47 pm"), "Hi — we met on Thursday, 10 Sep 2026 at 4:47 pm.");
