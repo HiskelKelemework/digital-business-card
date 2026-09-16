@@ -19,8 +19,27 @@ export function safeHttpsUrl(raw: string) {
   }
 }
 
+const CAL_SLUG = /^[A-Za-z0-9][A-Za-z0-9._/-]{0,120}$/;
+
+/** Slug for the Cal.com embed (`username/event`). Accepts that slug or a full https://cal.com URL. */
+export function calEmbedLink(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+
+  try {
+    const url = new URL(trimmed);
+    if (url.protocol !== "https:") return "";
+    const host = url.hostname.replace(/^www\./, "").toLowerCase();
+    if (host !== "cal.com" && host !== "app.cal.com") return "";
+    const slug = url.pathname.replace(/^\/+|\/+$/g, "");
+    return CAL_SLUG.test(slug) ? slug : "";
+  } catch {
+    return CAL_SLUG.test(trimmed) ? trimmed : "";
+  }
+}
+
 export function isCalLink(value: string) {
-  return /^[A-Za-z0-9][A-Za-z0-9._/-]{0,120}$/.test(value);
+  return calEmbedLink(value) !== "";
 }
 
 export function isWhatsAppUrl(raw: string) {

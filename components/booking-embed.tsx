@@ -4,33 +4,35 @@ import { Calendar } from "lucide-react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 import { card } from "@/lib/card";
-import { isCalLink, safeHttpsUrl } from "@/lib/format";
+import { calEmbedLink, safeHttpsUrl } from "@/lib/format";
 import { Tile, TileLabel } from "./tile";
 
+const CAL_NAMESPACE = "booking";
+
 export function BookingEmbed() {
-  const hasCal = isCalLink(card.booking.calLink);
-  const bookingUrl = safeHttpsUrl(card.booking.url);
+  const calLink = calEmbedLink(card.booking.calLink);
+  const bookingUrl = safeHttpsUrl(card.booking.url) || (calLink ? `https://cal.com/${calLink}` : "");
 
   useEffect(() => {
-    if (!hasCal) return;
+    if (!calLink) return;
     void (async () => {
-      const cal = await getCalApi({ namespace: "30min" });
+      const cal = await getCalApi({ namespace: CAL_NAMESPACE });
       cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
     })();
-  }, [hasCal]);
+  }, [calLink]);
 
-  if (!hasCal) return <BookingPlaceholder />;
+  if (!calLink) return <BookingPlaceholder />;
 
   return (
     <Tile id="book" delay={280} className="overflow-hidden p-0">
       <div className="px-5 pt-5">
         <TileLabel>Book a meeting</TileLabel>
-        <p className="mt-1 text-sm text-muted-foreground">Pick a 30-minute slot.</p>
+        <p className="mt-1 text-sm text-muted-foreground">Pick a time that works.</p>
       </div>
       <div className="mt-3 h-[min(36rem,70dvh)] overflow-hidden">
         <Cal
-          namespace="30min"
-          calLink={card.booking.calLink}
+          namespace={CAL_NAMESPACE}
+          calLink={calLink}
           style={{ width: "100%", height: "100%", overflow: "scroll" }}
           config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
         />
